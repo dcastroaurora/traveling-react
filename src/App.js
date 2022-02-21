@@ -1,37 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import * as React from 'react';
-import TourCard from './components/TourCard';
-import SearcAppBar from './components/AppBar';
-import Container from '@mui/material/Container';
-import Grid from "@mui/material/Grid";
-import cities from "./data.json";
-import Typography from '@mui/material/Typography';
+import SearcAppBar from "./components/AppBar";
+import Home from "./pages/Home";
+import Tour from "./pages/Tour";
 
 function App() {
   return (
-    <div className='App'>
+    <BrowserRouter>
       <SearcAppBar />
-      <Container sx={{marginY: 5}}>
-        {
-          cities.map((city) => (
-            <>
-              <Typography
-                variant="h4"
-                component="h2"
-                marginTop={5}
-                marginBottom={3}>
-                  Top {city.name} Tours
-              </Typography>
-              <Grid container spacing={5}>
-                {
-                  city.tours.map((tour, index) => <TourCard tour={tour} key={index} />)
-                }                
-              </Grid>
-            </>
-          ))
-        }
-      </Container>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/:id" element={<Tour />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
